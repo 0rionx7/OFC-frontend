@@ -1,0 +1,29 @@
+{
+  "name": "e-poka.web_server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "18.x"
+  },
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon --inspect server.js",
+    "test": "node test.js",
+    "lint": "eslint **/*.js"
+  },
+  "dependencies": {
+    "@socket.io/mongo-adapter": "^0.3.0",
+    "applicationinsights": "^2.9.1",
+    "axios": "^1.6.5",
+    "debug": "^4.3.4",
+    "express": "^4.18.2",
+    "mongoose": "^8.1.0",
+    "nodemailer": "^6.9.8",
+    "rate-limiter-flexible": "^4.0.0",
+    "socket.io": "^4.7.4"
+  },
+  "devDependencies": {
+    "eslint": "^8.54.0"
+  }
+}
