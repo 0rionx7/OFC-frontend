@@ -3,18 +3,17 @@ import mongoose from 'mongoose';
 try {
   mongoose.set('strictQuery', false); // if true only the fields that are specified in the Schema will be saved
   await mongoose.connect(
-    `mongodb+srv://${process.env.MONGO_DB_USERNAME}:${process.env.MONGO_DB_PASSWORD}@mean.c0rsp.mongodb.net/${process.env.ADAPTER_DB}?retryWrites=true&w=majority`
+    `mongodb+srv://orionx7:i7HxupA9otqHGDWo@testcluster.t3fpgoc.mongodb.net/AdapterDb?retryWrites=true&w=majority`,
+    { useNewUrlParser: true, useUnifiedTopology: true }
   );
   console.log('🌎 Connection to AdapterDb Succesfull! 🌎');
 } catch (err) {
-  console.log('🌞 Connection to MongoDB failed', err);
+  console.log('🌞 Connection to AdapterDb failed', err);
 }
 
 export const defaultConnection = mongoose.connection;
 
-export const adapterCollection = defaultConnection.collection(
-  process.env.ADAPTER_COLLECTION
-);
+export const adapterCollection = defaultConnection.collection('socketEvents');
 try {
   adapterCollection.createIndex(
     { createdAt: 1 },

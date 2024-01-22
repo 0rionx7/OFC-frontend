@@ -2,10 +2,6 @@ import express from 'express';
 
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
-
-import { rateLimiterMiddleWare } from './middleware/rate-limiter.js';
-import { gameStateRouter } from './routes/gameState.routes.js';
-import { forgotPassword } from './controllers/gameState.js';
 import { forwardToBackend } from './backendCall.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -28,7 +24,6 @@ app.use((_req, res, next) => {
 });
 app.set('etag', false); // for avoiding 304 not changed response
 app.disable('x-powered-by'); // for hiding being an express
-// app.use(rateLimiterMiddleWare);
 
 app.use((req, res, next) => {
   if ('OPTIONS' === req.method) res.sendStatus(200);
@@ -39,13 +34,7 @@ app.use((req, res, next) => {
   }
 });
 
-app.use('/gameState', gameStateRouter);
-app.use('/user/forgot', forgotPassword);
-app.use('/disconnection/sitOut', forwardToBackend);
-app.use('/requests', forwardToBackend);
-app.use('/tables', forwardToBackend);
-app.use('/user', forwardToBackend);
-app.use('/payments', forwardToBackend);
+app.use('/gameState', forwardToBackend);
 
 app.use(express.static(path.join(__dirname, 'build')));
 app.use((_req, res) => {

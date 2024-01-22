@@ -1,13 +1,11 @@
-import './analytics.js';
 import { createAdapter } from '@socket.io/mongo-adapter';
 import { Server } from 'socket.io';
 import debug from 'debug';
 
-import { adapterCollection } from './mongoConn.js';
-import { socketListen } from './socketIO.js';
 import { app } from './app.js';
+import { adapterCollection } from './mongoConn.js';
 
-const port = normalizePort(process.env.PORT || '3100');
+const port = normalizePort(process.env.PORT || '3200');
 app.set('port', port);
 
 export const server = app.listen(app.get('port'), () =>
@@ -17,11 +15,12 @@ export const socketIoServer = new Server(server, {
   connectionStateRecovery: { maxDisconnectionDuration: 1 * 60 * 1000 },
   pingInterval: 7000,
   pingTimeout: 40000,
+  cors: { origin: '*' },
 });
 socketIoServer.adapter(
   createAdapter(adapterCollection, { addCreatedAtField: true })
 );
-socketIoServer.on('connection', socketListen);
+socketIoServer.on('connection', socket => console.log(socket.id));
 
 server.on('error', onError);
 server.on('listening', onListening);
