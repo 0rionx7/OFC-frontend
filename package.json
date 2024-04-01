@@ -1,10 +1,10 @@
 {
-  "name": "ofc.web_server",
+  "name": "ofc.webserver",
   "version": "1.0.0",
   "private": true,
   "type": "module",
   "engines": {
-    "node": "18.x"
+    "node": "20.x"
   },
   "main": "server.js",
   "scripts": {
