@@ -8,9 +8,7 @@
   },
   "main": "server.js",
   "scripts": {
-    "start": "nodemon --inspect server.js",
-    "test": "node test.js",
-    "lint": "eslint **/*.js"
+    "start": "node server.js",
   },
   "dependencies": {
     "@socket.io/mongo-adapter": "^0.3.0",
